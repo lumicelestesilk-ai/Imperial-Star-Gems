@@ -1,69 +1,146 @@
-import Image from "next/image";
+import Link from "next/link";
+import { ArrowRight, Diamond, ShieldCheck, Sparkles } from "lucide-react";
+import { CatalogGrid, FeaturedStoneList } from "@/components/catalog-grid";
+import { DiamondSequence } from "@/components/diamond-sequence";
+import { ShapeGlyph } from "@/components/shape-glyph";
+import { labStones, naturalStones, shapeList } from "@/lib/catalog";
 
-export default function Home() {
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+    <>
+      <section className="hero">
+        <div className="hero__intro">
+          <p className="eyebrow">Loose natural and lab-grown diamonds</p>
+          <h1>Diamond clarity, without the noise.</h1>
+          <p className="lede">
+            Imperial Star Gems presents selected stones chosen for cut, proportion,
+            and fire — not for showmanship. The collection is designed for private
+            and trade buyers seeking precision, calm confidence, and a direct route
+            to enquiry.
+          </p>
+          <div className="hero__actions">
+            <Link href="/natural-diamonds" className="button button--primary">
+              Browse natural stones
+            </Link>
+            <Link href="/lab-grown-diamonds" className="button button--ghost">
+              Browse lab-grown
+            </Link>
+          </div>
+        </div>
+        <div className="hero__stat-panel">
+          <div className="hero__stat-block">
+            <span>Shapes</span>
+            <strong>11</strong>
+          </div>
+          <div className="hero__stat-block">
+            <span>Origin</span>
+            <strong>Natural + lab</strong>
+          </div>
+          <div className="hero__stat-block">
+            <span>Standards</span>
+            <strong>GIA / IGI</strong>
+          </div>
+        </div>
+      </section>
+
+      <DiamondSequence />
+
+      <section className="spread">
+        <div className="section-heading">
+          <p className="eyebrow">The collection</p>
+          <h2>Choose by shape, colour and character.</h2>
+        </div>
+        <div className="shape-grid">
+          {shapeList.map((shape) => (
+            <Link key={shape.name} href="/shapes" className="shape-tile">
+              <ShapeGlyph shape={shape.name} className="shape-tile__icon" />
+              <strong>{shape.name}</strong>
+              <span>{shape.summary}</span>
+            </Link>
+          ))}
+        </div>
+      </section>
+
+      <section className="split-panel">
+        <div className="split-copy">
+          <p className="eyebrow">Natural vs. lab-grown</p>
+          <h2>Two routes, same standards.</h2>
+          <p>
+            Natural stones carry the depth of a geological history. Lab-grown
+            diamonds offer a precise, modern value proposition with equivalent
+            performance in brilliance and grading. Each is selected with the same
+            focus on proportion, finish, and light return.
           </p>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+        <div className="origin-cards">
+          <div className="origin-card">
+            <Diamond className="origin-card__icon" />
+            <h3>Natural</h3>
+            <p>Earth-formed diamonds with distinct provenance and character.</p>
+            <Link href="/natural-diamonds">View natural stones</Link>
+          </div>
+          <div className="origin-card">
+            <Sparkles className="origin-card__icon" />
+            <h3>Lab-grown</h3>
+            <p>Scientifically grown, beautifully cut, and exceptionally efficient.</p>
+            <Link href="/lab-grown-diamonds">View lab-grown stones</Link>
+          </div>
         </div>
-      </main>
-    </div>
+      </section>
+
+      <section className="catalog-section">
+        <div className="section-heading section-heading--row">
+          <div>
+            <p className="eyebrow">Featured stones</p>
+            <h2>Selected for brilliance and balance.</h2>
+          </div>
+          <Link href="/natural-diamonds" className="button button--ghost inline-link">
+            View all stones <ArrowRight size={16} />
+          </Link>
+        </div>
+        <FeaturedStoneList stones={[...naturalStones.slice(0, 2), ...labStones.slice(0, 2)]} />
+      </section>
+
+      <section className="story-panel">
+        <div className="story-panel__copy">
+          <p className="eyebrow">Craftsmanship</p>
+          <h2>From rough crystal to radiant finish.</h2>
+          <p>
+            The stone is mapped before the first cut. Planning preserves yield and
+            fire; sawing opens the rough; faceting and polishing define the final
+            performance. The result is a diamond that is not only admired but also
+            proportioned with intent.
+          </p>
+          <Link href="/craftsmanship" className="button button--ghost">
+            Learn the process
+          </Link>
+        </div>
+        <div className="story-steps">
+          <div>
+            <span>01</span>
+            <h3>Planning</h3>
+            <p>Mapping the cut to amplify face-up brilliance and optimize yield.</p>
+          </div>
+          <div>
+            <span>02</span>
+            <h3>Sawing</h3>
+            <p>Opening the rough to reveal the internal potential of the stone.</p>
+          </div>
+          <div>
+            <span>03</span>
+            <h3>Polishing</h3>
+            <p>Creating micro-precise facets to maximize light return and fire.</p>
+          </div>
+        </div>
+      </section>
+
+      <section className="trust-strip">
+        <ShieldCheck size={22} />
+        <p>
+          Independent grading, clear documentation and direct enquiry pathways for
+          trade and private buyers.
+        </p>
+      </section>
+    </>
   );
 }
